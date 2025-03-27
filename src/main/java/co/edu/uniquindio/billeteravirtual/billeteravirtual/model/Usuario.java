@@ -3,8 +3,9 @@ package co.edu.uniquindio.billeteravirtual.billeteravirtual.model;
 import java.util.List;
 
 public class Usuario {
-    public int idUsuario;
-    public String nombreCompleto;
+    public String nombre;
+    public String apellido;
+    public String cedula;
     public String correoElectronico;
     public String numeroTelefono;
     public String direccion;
@@ -16,31 +17,40 @@ public class Usuario {
     public Usuario(){
     }
 
-    public Usuario(int idUsuario, String nombreCompleto, String correoElectronico,
+    public Usuario(String nombre, String apellido, String cedula, String correoElectronico,
                    String numeroTelefono, String direccion, String saldoTotalDisponible){
-        this.idUsuario = idUsuario;
-        this.nombreCompleto = nombreCompleto;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.cedula = cedula;
         this.correoElectronico = correoElectronico;
         this.numeroTelefono = numeroTelefono;
         this.direccion = direccion;
         this.saldoTotalDisponible = saldoTotalDisponible;
     }
 
-    public int getIdUsuario(){
-        return idUsuario;
+    public String getNombre(){
+        return nombre;
+    }
+    public void setNombre(String nombre){
+        this.nombre = nombre;
     }
 
-    public void setIdUsuario(int idUsuario){
-        this.idUsuario = idUsuario;
+    public String getApellido(){
+        return apellido;
     }
 
-    public String getNombreCompleto(){
-        return nombreCompleto;
+    public void setApellido(String apellido){
+        this.apellido = apellido;
     }
 
-    public void setNombreCompleto(String nombreCompleto){
-        this.nombreCompleto = nombreCompleto;
+    public String getCedula(){
+        return cedula;
     }
+
+    public void setCedula(String cedula){
+        this.cedula = cedula;
+    }
+
 
     public String getCorreoElectronico(){
         return correoElectronico;
