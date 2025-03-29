@@ -5,8 +5,8 @@ import co.edu.uniquindio.billeteravirtual.billeteravirtual.model.Usuario;
 
 public class AdministradorFactory {
     @Override
-    public Usuario crearUsuario(int id, String nombre, String correo,
-                                String telefono, String direccion, String saldoTotalDisponible) {
+    public Usuario crearUsuario(String nombre, String apellido, String cedula, String correo,
+                                String numero, String direccion, String saldoTotalDisponible) {
         return new Administrador(id, nombre, correo, telefono, direccion, saldoTotalDisponible);
     }
 }

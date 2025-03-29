@@ -1,5 +1,7 @@
 package co.edu.uniquindio.billeteravirtual.billeteravirtual.model;
 
+import co.edu.uniquindio.billeteravirtual.billeteravirtual.model.builder.UsuarioBuilder;
+
 import java.util.List;
 
 public class Usuario {
@@ -26,6 +28,10 @@ public class Usuario {
         this.numeroTelefono = numeroTelefono;
         this.direccion = direccion;
         this.saldoTotalDisponible = saldoTotalDisponible;
+    }
+
+    public static UsuarioBuilder builder(){
+        return new UsuarioBuilder();
     }
 
     public String getNombre(){
@@ -83,5 +89,6 @@ public class Usuario {
     public void setSaldoTotalDisponible(String saldoTotalDisponible){
         this.saldoTotalDisponible = saldoTotalDisponible;
     }
+
 
 }

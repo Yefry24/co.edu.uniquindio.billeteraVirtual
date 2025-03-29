@@ -3,6 +3,8 @@ package co.edu.uniquindio.billeteravirtual.billeteravirtual.viewController;
 import co.edu.uniquindio.billeteravirtual.billeteravirtual.controller.UsuarioController;
 import co.edu.uniquindio.billeteravirtual.billeteravirtual.mapping.dto.UsuarioDto;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,6 +15,8 @@ import javafx.scene.control.TextField;
 public class UsuarioViewController {
 
     UsuarioController usuarioController;
+    ObservableList<UsuarioDto> ListaUsuarios = FXCollections.observableArrayList();
+    UsuarioDto usuarioSeleccionado;
 
     @FXML
     private Button btnActualizar;
@@ -69,7 +73,7 @@ public class UsuarioViewController {
     private TextField txtSaldo;
 
     @FXML
-    private TextField txtpellido;
+    private TextField txtApellido;
 
 
     @FXML
@@ -95,6 +99,26 @@ public class UsuarioViewController {
         tcNumero.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().numeroTelefono()));
         tcDireccion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().direccion()));
         tcSaldo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().saldoTotalDisponible()));
+    }
+
+    private void ListenerSelection() {
+        tableUsuario.getSelectionModel().selectedItemProperty().addListener((obs,
+                                                                             oldSelection, newSelection) -> {
+            usuarioSeleccionado = newSelection;
+            mostrarInformacionUsuario(usuarioSeleccionado);
+        });
+    }
+
+    private void mostrarInformacionUsuario(UsuarioDto usuarioSeleccionado) {
+        if(usuarioSeleccionado != null){
+            txtNombre.setText(usuarioSeleccionado.nombre());
+            txtApellido.setText(usuarioSeleccionado.apellido());
+            txtCedula.setText(usuarioSeleccionado.cedula());
+            txtCorreo.setText(usuarioSeleccionado.correoElectronico());
+            txtNumero.setText(usuarioSeleccionado.numeroTelefono());
+            txtDireccion.setText(usuarioSeleccionado.direccion());
+            txtSaldo.setText(usuarioSeleccionado.saldoTotalDisponible());
+        }
     }
 
     @FXML

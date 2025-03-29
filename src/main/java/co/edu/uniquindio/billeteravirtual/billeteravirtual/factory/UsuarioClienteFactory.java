@@ -4,8 +4,10 @@ import co.edu.uniquindio.billeteravirtual.billeteravirtual.model.Usuario;
 
 public class UsuarioClienteFactory extends UsuarioFactory{
     @Override
-    public Usuario crearUsuario(int id, String nombre, String correo, String telefono,
+    public Usuario crearUsuario(String nombre, String apellido, String cedula,
+                                String correo, String numero,
                                 String direccion, String saldoTotalDisponible) {
-        return new Usuario(id, nombre, correo, telefono, direccion, saldoTotalDisponible);
+        return new Usuario(nombre, apellido, cedula, correo, numero, direccion,
+                saldoTotalDisponible);
     }
 }
