@@ -5,9 +5,9 @@ public class Administrador extends Usuario{
     public Administrador(){
     }
 
-    public Administrador(int idUsuario, String nombreCompleto, String correoElectronico,
+    public Administrador(String nombre, String apellido, String cedula, String correoElectronico,
                          String numeroTelefono, String direccion, String saldoTotalDisponible){
-        super(idUsuario,nombreCompleto,correoElectronico,numeroTelefono,direccion,
+        super(nombre,apellido,cedula,correoElectronico,numeroTelefono,direccion,
                 saldoTotalDisponible);
     }
 

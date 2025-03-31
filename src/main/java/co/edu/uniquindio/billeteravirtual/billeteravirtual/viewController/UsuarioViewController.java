@@ -91,6 +91,12 @@ public class UsuarioViewController {
         ListenerSelection();
     }
 
+    private void obtenerUsuarios() {
+        ListaUsuarios.addAll(usuarioController.obtenerUsuarios());
+
+
+    }
+
     private void initDataBinding() {
         tcNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().nombre()));
         tcApellido.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().apellido()));

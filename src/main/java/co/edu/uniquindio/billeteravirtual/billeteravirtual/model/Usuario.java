@@ -90,5 +90,19 @@ public class Usuario {
         this.saldoTotalDisponible = saldoTotalDisponible;
     }
 
-
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", cedula='" + cedula + '\'' +
+                ", correoElectronico='" + correoElectronico + '\'' +
+                ", numeroTelefono='" + numeroTelefono + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", saldoTotalDisponible='" + saldoTotalDisponible + '\'' +
+                ", cuentas=" + cuentas +
+                ", transacciones=" + transacciones +
+                ", presupuestos=" + presupuestos +
+                '}';
+    }
 }
