@@ -7,15 +7,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+
+import java.util.Optional;
+
+import static co.edu.uniquindio.billeteravirtual.billeteravirtual.utils.Constantes.*;
 
 public class UsuarioViewController {
 
     UsuarioController usuarioController;
-    ObservableList<UsuarioDto> ListaUsuarios = FXCollections.observableArrayList();
+    ObservableList<UsuarioDto> listaUsuarios = FXCollections.observableArrayList();
     UsuarioDto usuarioSeleccionado;
 
     @FXML
@@ -87,12 +88,12 @@ public class UsuarioViewController {
         initDataBinding();
         obtenerUsuarios();
         tableUsuario.getItems().clear();
-        tableUsuario.setItems(ListaUsuarios);
+        tableUsuario.setItems(listaUsuarios);
         ListenerSelection();
     }
 
     private void obtenerUsuarios() {
-        ListaUsuarios.addAll(usuarioController.obtenerUsuarios());
+        listaUsuarios.addAll(usuarioController.obtenerUsuarios());
 
 
     }
@@ -115,6 +116,64 @@ public class UsuarioViewController {
         });
     }
 
+    private void agregarUsuario() {
+        UsuarioDto usuarioDto = crearUsuarioDto();
+        
+        if(datosValidos(usuarioDto)){
+            if(usuarioController.agregarUsuario(usuarioDto)){
+                listaUsuarios.addAll(usuarioDto);
+                limpiarCampos();
+                mostrarMensaje(TITULO_USUARIO_AGREGADO,HEADER,
+                        BODY_USUARIO_AGREGADO,Alert.AlertType.INFORMATION);
+            }else{
+                mostrarMensaje(TITULO_USUARIO_NO_ENCONTRADO,HEADER,
+                        BODY_USUARIO_NO_AGREGADO,Alert.AlertType.ERROR);
+            }
+            
+        }else{
+            mostrarMensaje(TITULO_INCOMPLETO, HEADER,
+                    BODY_INCOMPLETO,
+                     Alert.AlertType.ERROR);
+
+        }
+    }
+
+    private void limpiarCampos() {
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtCedula.setText("");
+        txtCorreo.setText("");
+        txtNumero.setText("");
+        txtDireccion.setText("");
+        txtSaldo.setText("");
+    }
+
+    private UsuarioDto crearUsuarioDto() {
+        return new UsuarioDto(
+                txtNombre.getText(),
+                txtApellido.getText(),
+                txtCedula.getText(),
+                txtCorreo.getText(),
+                txtNumero.getText(),
+                txtDireccion.getText(),
+                txtSaldo.getText()
+                );
+    }
+
+    private boolean datosValidos(UsuarioDto usuarioDto) {
+        if(usuarioDto.nombre().isEmpty()||
+            usuarioDto.apellido().isEmpty()||
+            usuarioDto.cedula().isEmpty()||
+            usuarioDto.correoElectronico().isEmpty()||
+            usuarioDto.numeroTelefono().isEmpty()||
+            usuarioDto.direccion().isEmpty()
+        ){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
     private void mostrarInformacionUsuario(UsuarioDto usuarioSeleccionado) {
         if(usuarioSeleccionado != null){
             txtNombre.setText(usuarioSeleccionado.nombre());
@@ -127,6 +186,27 @@ public class UsuarioViewController {
         }
     }
 
+    private void mostrarMensaje(String titulo, String header, String contenido,
+                                Alert.AlertType alerType){
+        Alert aler = new Alert(alerType);
+        aler.setTitle(titulo);
+        aler.setHeaderText(header);
+        aler.setContentText(contenido);
+        aler.showAndWait();
+    }
+
+    private boolean mostrarMensajeConfirmacion(String mensaje){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        Optional<ButtonType> action = alert.showAndWait();
+        if(action.get() == ButtonType.OK){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     @FXML
     void OnActualizarCliente(ActionEvent event) {
 
@@ -134,6 +214,7 @@ public class UsuarioViewController {
 
     @FXML
     void OnAgregarCliente(ActionEvent event) {
+        agregarUsuario();
 
     }
 

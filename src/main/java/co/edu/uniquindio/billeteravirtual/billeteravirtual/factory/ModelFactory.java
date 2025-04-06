@@ -32,6 +32,10 @@ public class ModelFactory implements IModelFactoryService {
         return mapper.getUsuariosDto(billetera.getListaUsuarios());
     }
 
+    @Override
+    public boolean agregarUsuario(UsuarioDto usuarioDto) {
+        return billetera.crearUsuario(mapper.usuarioDtoToUsuario(usuarioDto));
+    }
 
 
 }

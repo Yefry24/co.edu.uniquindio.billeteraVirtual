@@ -16,6 +16,10 @@ public class UsuarioController {
             return modelFactory.obtenerUsuarios();
     }
 
+    public boolean agregarUsuario(UsuarioDto usuarioDto) {
+        return modelFactory.agregarUsuario(usuarioDto);
+    }
+
     //public boolean crearUsuario (UsuarioDto usuario) {
        // return modelFactory.crearUsuario(usuario);
     //}
